@@ -11,9 +11,9 @@
 
 namespace Sonata\AdminBundle\Datagrid;
 
-use Sonata\AdminBundle\Datagrid\PagerInterface;
-use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
-use Sonata\AdminBundle\Filter\FilterInterface;
+use Application\Sonata\DatagridBundle\Datagrid\Datagrid as BaseDatagrid;
+use Application\Sonata\DatagridBundle\Pager\PagerInterface as BasePagerInterface;
+use Application\Sonata\DatagridBundle\ProxyQuery\ProxyQueryInterface;
 use Sonata\AdminBundle\Admin\FieldDescriptionCollection;
 use Sonata\AdminBundle\Admin\FieldDescriptionInterface;
 
@@ -21,67 +21,25 @@ use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Form\CallbackTransformer;
 
-class Datagrid implements DatagridInterface
+class Datagrid extends BaseDatagrid
 {
     /**
-     *
-     * The filter instances
-     * @var array
+     * @var FieldDescriptionCollection
      */
-    protected $filters = array();
-
-    protected $values;
-
     protected $columns;
-
-    protected $pager;
-
-    protected $bound = false;
-
-    protected $query;
-
-    protected $formBuilder;
-
-    protected $form;
-
-    protected $results;
 
     /**
      * @param ProxyQueryInterface        $query
      * @param FieldDescriptionCollection $columns
-     * @param PagerInterface             $pager
+     * @param BasePagerInterface         $pager
      * @param FormBuilder                $formBuilder
      * @param array                      $values
      */
-    public function __construct(ProxyQueryInterface $query, FieldDescriptionCollection $columns, PagerInterface $pager, FormBuilder $formBuilder, array $values = array())
+    public function __construct(ProxyQueryInterface $query, FieldDescriptionCollection $columns, BasePagerInterface $pager, FormBuilder $formBuilder, array $values = array())
     {
-        $this->pager       = $pager;
-        $this->query       = $query;
-        $this->values      = $values;
-        $this->columns     = $columns;
-        $this->formBuilder = $formBuilder;
-    }
+        parent::__construct($query, $pager, $formBuilder, $values);
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getPager()
-    {
-        return $this->pager;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getResults()
-    {
-        $this->buildPager();
-
-        if (!$this->results) {
-            $this->results = $this->pager->getResults();
-        }
-
-        return $this->results;
+        $this->columns = $columns;
     }
 
     /**
@@ -125,7 +83,10 @@ class Datagrid implements DatagridInterface
             }
 
             if ($this->values['_sort_by']->isSortable()) {
-                $this->query->setSortBy($this->values['_sort_by']->getSortParentAssociationMapping(), $this->values['_sort_by']->getSortFieldMapping());
+                $this->query->setSortBy(array(
+                    'parentAssociationMapping' => $this->values['_sort_by']->getSortParentAssociationMapping(),
+                    'fieldMapping'             => $this->values['_sort_by']->getSortFieldMapping()
+                ));
                 $this->query->setSortOrder(isset($this->values['_sort_order']) ? $this->values['_sort_order'] : null);
             }
         }
@@ -141,107 +102,8 @@ class Datagrid implements DatagridInterface
     /**
      * {@inheritdoc}
      */
-    public function addFilter(FilterInterface $filter)
-    {
-        $this->filters[$filter->getName()] = $filter;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function hasFilter($name)
-    {
-        return isset($this->filters[$name]);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removeFilter($name)
-    {
-        unset($this->filters[$name]);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getFilter($name)
-    {
-        return $this->hasFilter($name) ? $this->filters[$name] : null;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getFilters()
-    {
-        return $this->filters;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function reorderFilters(array $keys)
-    {
-        $this->filters = array_merge(array_flip($keys), $this->filters);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getValues()
-    {
-        return $this->values;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setValue($name, $operator, $value)
-    {
-        $this->values[$name] = array(
-            'type'  => $operator,
-            'value' => $value
-        );
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function hasActiveFilters()
-    {
-        foreach ($this->filters as $name => $filter) {
-            if ($filter->isActive()) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getColumns()
     {
         return $this->columns;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getQuery()
-    {
-        return $this->query;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getForm()
-    {
-        $this->buildPager();
-
-        return $this->form;
     }
 }

@@ -11,6 +11,8 @@
 
 namespace Sonata\AdminBundle\Filter;
 
+use Application\Sonata\DatagridBundle\Filter\FilterInterface;
+
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class FilterFactory implements FilterFactoryInterface
@@ -36,7 +38,7 @@ class FilterFactory implements FilterFactoryInterface
      * @param string $type
      * @param array  $options
      *
-     * @return \Sonata\AdminBundle\Filter\FilterInterface
+     * @return FilterInterface
      */
     public function create($name, $type, array $options = array())
     {

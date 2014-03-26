@@ -11,12 +11,13 @@
 
 namespace Sonata\AdminBundle\Admin;
 
+use Application\Sonata\DatagridBundle\ProxyQuery\ProxyQueryInterface;
+
 use Sonata\AdminBundle\Admin\Pool;
 use Sonata\AdminBundle\Admin\FieldDescriptionInterface;
 use Sonata\AdminBundle\Builder\FormContractorInterface;
 use Sonata\AdminBundle\Builder\ListBuilderInterface;
 use Sonata\AdminBundle\Builder\DatagridBuilderInterface;
-use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Security\Handler\SecurityHandlerInterface;
 use Sonata\AdminBundle\Builder\RouteBuilderInterface;
 use Sonata\AdminBundle\Translator\LabelTranslatorStrategyInterface;
@@ -190,7 +191,7 @@ interface AdminInterface
     /**
      * @param string $context
      *
-     * @return \Sonata\AdminBundle\Datagrid\ProxyQueryInterface
+     * @return ProxyQueryInterface
      */
     public function createQuery($context = 'list');
 

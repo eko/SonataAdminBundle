@@ -11,9 +11,10 @@
 
 namespace Sonata\AdminBundle\Builder;
 
+use Application\Sonata\DatagridBundle\Datagrid\DatagridInterface;
+
 use Sonata\AdminBundle\Admin\FieldDescriptionInterface;
 use Sonata\AdminBundle\Admin\AdminInterface;
-use Sonata\AdminBundle\Datagrid\DatagridInterface;
 
 interface DatagridBuilderInterface extends BuilderInterface
 {
@@ -21,10 +22,10 @@ interface DatagridBuilderInterface extends BuilderInterface
     /**
      * @abstract
      *
-     * @param \Sonata\AdminBundle\Datagrid\DatagridInterface      $datagrid
-     * @param string                                              $type
-     * @param \Sonata\AdminBundle\Admin\FieldDescriptionInterface $fieldDescription
-     * @param \Sonata\AdminBundle\Admin\AdminInterface            $admin
+     * @param DatagridInterface         $datagrid
+     * @param string                    $type
+     * @param FieldDescriptionInterface $fieldDescription
+     * @param AdminInterface            $admin
      *
      * @return void
      */

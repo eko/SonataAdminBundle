@@ -11,9 +11,10 @@
 
 namespace Sonata\AdminBundle\Model;
 
+use Application\Sonata\DatagridBundle\Datagrid\DatagridInterface;
+use Application\Sonata\DatagridBundle\ProxyQuery\ProxyQueryInterface;
+
 use Sonata\AdminBundle\Admin\FieldDescriptionInterface;
-use Sonata\AdminBundle\Datagrid\DatagridInterface;
-use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 
 /**
  * A model manager is a bridge between the model classes and the admin

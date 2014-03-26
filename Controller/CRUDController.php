@@ -11,6 +11,8 @@
 
 namespace Sonata\AdminBundle\Controller;
 
+use Application\Sonata\DatagridBundle\ProxyQuery\ProxyQueryInterface;
+
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -20,7 +22,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sonata\AdminBundle\Exception\ModelManagerException;
 use Symfony\Component\HttpFoundation\Request;
-use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Admin\BaseFieldDescription;
 use Sonata\AdminBundle\Util\AdminObjectAclData;
 
@@ -190,7 +191,7 @@ class CRUDController extends Controller
      *
      * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
      *
-     * @param \Sonata\AdminBundle\Datagrid\ProxyQueryInterface $query
+     * @param ProxyQueryInterface $query
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */

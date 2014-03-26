@@ -10,81 +10,17 @@
 
 namespace Sonata\AdminBundle\Datagrid;
 
+use Application\Sonata\DatagridBundle\ProxyQuery\ProxyQueryInterface as BaseProxyQueryInterface;
+
 /**
  * Interface used by the Datagrid to build the query
  */
-interface ProxyQueryInterface
+interface ProxyQueryInterface extends BaseProxyQueryInterface
 {
-    /**
-     *
-     * @param array $params
-     * @param null  $hydrationMode
-     *
-     * @return mixed
-     */
-    public function execute(array $params = array(), $hydrationMode = null);
-
-    /**
-     * @param string $name
-     * @param array  $args
-     *
-     * @return mixed
-     */
-    public function __call($name, $args);
-
-    /**
-     * @param array $parentAssociationMappings
-     * @param array $fieldMapping
-     *
-     * @return ProxyQueryInterface
-     */
-    public function setSortBy($parentAssociationMappings, $fieldMapping);
-
-    /**
-     * @return mixed
-     */
-    public function getSortBy();
-
-    /**
-     * @param mixed $sortOrder
-     *
-     * @return ProxyQueryInterface
-     */
-    public function setSortOrder($sortOrder);
-
-    /**
-     * @return mixed
-     */
-    public function getSortOrder();
-
     /**
      * @return mixed
      */
     public function getSingleScalarResult();
-
-    /**
-     * @param int $firstResult
-     *
-     * @return ProxyQueryInterface
-     */
-    public function setFirstResult($firstResult);
-
-    /**
-     * @return mixed
-     */
-    public function getFirstResult();
-
-    /**
-     * @param int $maxResults
-     *
-     * @return ProxyQueryInterface
-     */
-    public function setMaxResults($maxResults);
-
-    /**
-     * @return mixed
-     */
-    public function getMaxResults();
 
     /**
      * @return mixed

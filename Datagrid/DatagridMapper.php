@@ -10,9 +10,10 @@
  */
 namespace Sonata\AdminBundle\Datagrid;
 
+use Application\Sonata\DatagridBundle\Datagrid\DatagridInterface;
+
 use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Admin\FieldDescriptionInterface;
-use Sonata\AdminBundle\Datagrid\DatagridInterface;
 use Sonata\AdminBundle\Builder\DatagridBuilderInterface;
 use Sonata\AdminBundle\Mapper\BaseMapper;
 
@@ -32,7 +33,8 @@ class DatagridMapper extends BaseMapper
     public function __construct(DatagridBuilderInterface $datagridBuilder, DatagridInterface $datagrid, AdminInterface $admin)
     {
         parent::__construct($datagridBuilder, $admin);
-        $this->datagrid        = $datagrid;
+
+        $this->datagrid = $datagrid;
     }
 
     /**

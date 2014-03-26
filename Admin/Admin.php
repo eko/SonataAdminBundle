@@ -11,7 +11,8 @@
 
 namespace Sonata\AdminBundle\Admin;
 
-use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
+use Application\Sonata\DatagridBundle\ProxyQuery\ProxyQueryInterface;
+
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\PropertyAccess\PropertyPath;

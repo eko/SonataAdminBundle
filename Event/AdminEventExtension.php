@@ -11,13 +11,14 @@
 
 namespace Sonata\AdminBundle\Event;
 
+use Application\Sonata\DatagridBundle\ProxyQuery\ProxyQueryInterface;
+
 use Sonata\AdminBundle\Admin\AdminExtension;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\AdminBundle\Admin\AdminInterface;
-use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class AdminEventExtension extends AdminExtension

@@ -11,8 +11,10 @@
 
 namespace Sonata\AdminBundle\Event;
 
+use Application\Sonata\DatagridBundle\ProxyQuery\ProxyQueryInterface;
+
 use Sonata\AdminBundle\Admin\AdminInterface;
-use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
+
 use Symfony\Component\EventDispatcher\Event;
 
 /**
